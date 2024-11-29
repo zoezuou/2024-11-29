@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <input id="userinput" type="text">
+    <button id="btn">送出</button>
+  </section>
+  <section id="textlist"></section>
+  <script>
+    let userinput = document.querySelector('#userinput');
+    let btn = document.querySelector('#btn');
+    let textlist = document.querySelector('#textlist');
+    let textarray = localStorage.getItem('textarray') ? localStorage.getItem('textarray').split(',') : [];
+    textshow(); //資料的方式來產生
+
+    btn.addEventListener('click', () => {
+
+      if (userinput.value == '') return;
+
+      textarray.push(userinput.value);
+      localStorage.setItem('textarray', textarray);
+
+      textshow();
+    });
+
+    // 顯示畫面資料
+    function textshow() {
+      textlist.innerHTML = '';//清空內容
+      // ※for
+      console.log(textarray.length);
+      0, 1, 2, 3, 4, 5, 6, 7
+      // 1.修改for迴圈的index內容
+      // for (let index = textarray.length - 1; index >= 0; index--) {
+      //   console.log(textarray[index], index);
+      // }
+
+      // 2.調整index - 1
+      // for (let index = textarray.length; index > 0; index--) {
+      //   console.log(textarray[index - 1], index);
+      //   textlist.innerHTML += `<div>${textarray[index-1]}</div>`;
+      // }
+
+      // ※陣列的方法來處理(reverse())
+      // 陣列.reverse()
+      // console.log(textarray);
+      // console.log(textarray.reverse());
+      textarray.reverse().forEach(element => {
+        textlist.innerHTML += `<div>${element}</div>`;
+      });
+    }
+  </script>
+</body>
+
+</html>
